@@ -44,11 +44,26 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         if game.state == .PLAYING {
-            game.receiveNewTouches(touches, inNode: self)
+            game.receiveNewTouches(touches, inNode: root)
         }
     }
-   
+
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if game.state == .PLAYING {
+            game.removeTouches(touches)
+        }
+    }
+
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        if let t = touches where game.state == .PLAYING {
+            game.removeTouches(t)
+        }
+    }
+
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        if game.state == .PLAYING {
+            game.update()
+        }
     }
 }

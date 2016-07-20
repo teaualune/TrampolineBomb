@@ -51,32 +51,43 @@ class TBPlayer {
     func addPlayer(toNode: SKNode, frame: CGRect) {
         let y: CGFloat
         let labelY: CGFloat
+        let yRange: SKRange
+        let halfTrampolineHeight = SIZE.height / 2 - 10
         switch playerNumber {
         case .One:
             y = CGRectGetMidY(frame) / 2
             labelY = CGRectGetMinY(frame) + 20
+            yRange = SKRange(lowerLimit: CGRectGetMinY(frame) + halfTrampolineHeight, upperLimit: CGRectGetMidY(frame) - halfTrampolineHeight)
             break
         case .Two:
             y = CGRectGetMidY(frame) * 3 / 2
             labelY = CGRectGetMaxY(frame) - 20
+            yRange = SKRange(lowerLimit: CGRectGetMidY(frame) + halfTrampolineHeight, upperLimit: CGRectGetMaxY(frame) - halfTrampolineHeight)
         }
         let x = CGRectGetMidX(frame)
         playerLabel.position = CGPointMake(x, labelY)
         trampoline.position = CGPointMake(x, y)
+        let halfTrampolineWidth = SIZE.width / 2 - 10
+        trampoline.constraints = [SKConstraint.positionX(SKRange(lowerLimit: CGRectGetMinX(frame) + halfTrampolineWidth, upperLimit: CGRectGetMaxX(frame) - halfTrampolineWidth), y: yRange)]
         toNode.addChild(playerLabel)
         toNode.addChild(trampoline)
     }
 
     func isPointNearTrampoline(point: CGPoint) -> CGPoint? {
         let distance = CGPoint.distance(point, second: trampoline.position)
-        if distance < NEAR_THRESHOLD {
+        if distance < PLAYER_DRAG_THRESHOLD {
             return point - trampoline.position
         } else {
             return nil
         }
     }
+
+    func updateTrampolinePosition(touch: UITouch) {
+        guard let parent = trampoline.parent else { return }
+        trampoline.position = touch.locationInNode(parent) - dragOffset
+    }
 }
 
 private let MAX_HP: Int = 5
 private let SIZE = CGSizeMake(100, 100)
-private let NEAR_THRESHOLD: CGFloat = 90
+let PLAYER_DRAG_THRESHOLD: CGFloat = 140
