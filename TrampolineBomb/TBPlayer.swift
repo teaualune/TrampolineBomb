@@ -6,10 +6,77 @@
 //  Copyright © 2016年 Radioflux. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
+
+enum PlayerNumber : Int, Hashable {
+    case One = 0
+    case Two = 1
+
+    var hashValue: Int { get {
+        return rawValue
+    }}
+}
+
+func ==(lhs: PlayerNumber, rhs: PlayerNumber) -> Bool {
+    return lhs.hashValue == rhs.hashValue
+}
 
 class TBPlayer {
+
     var hp = MAX_HP
+    let trampoline: TBTrampoline
+    let playerLabel: SKLabelNode
+    let playerNumber: PlayerNumber
+
+    var dragOffset: CGPoint = CGPointZero
+
+    init(playerNumber: PlayerNumber) {
+        self.playerNumber = playerNumber
+        switch playerNumber {
+        case .One:
+            trampoline = TBTrampoline(backgroundName: "trampoline1", size: SIZE)
+            playerLabel = SKLabelNode(text: "player 1")
+            break
+        case .Two:
+            trampoline = TBTrampoline(backgroundName: "trampoline2", size: SIZE)
+            trampoline.zRotation = CGFloat(M_PI)
+            playerLabel = SKLabelNode(text: "player 2")
+            playerLabel.zRotation = CGFloat(M_PI)
+            break
+        }
+        playerLabel.fontName = "Chalkduster"
+        playerLabel.fontSize = 20
+    }
+
+    func addPlayer(toNode: SKNode, frame: CGRect) {
+        let y: CGFloat
+        let labelY: CGFloat
+        switch playerNumber {
+        case .One:
+            y = CGRectGetMidY(frame) / 2
+            labelY = CGRectGetMinY(frame) + 20
+            break
+        case .Two:
+            y = CGRectGetMidY(frame) * 3 / 2
+            labelY = CGRectGetMaxY(frame) - 20
+        }
+        let x = CGRectGetMidX(frame)
+        playerLabel.position = CGPointMake(x, labelY)
+        trampoline.position = CGPointMake(x, y)
+        toNode.addChild(playerLabel)
+        toNode.addChild(trampoline)
+    }
+
+    func isPointNearTrampoline(point: CGPoint) -> CGPoint? {
+        let distance = CGPoint.distance(point, second: trampoline.position)
+        if distance < NEAR_THRESHOLD {
+            return point - trampoline.position
+        } else {
+            return nil
+        }
+    }
 }
 
 private let MAX_HP: Int = 5
+private let SIZE = CGSizeMake(100, 100)
+private let NEAR_THRESHOLD: CGFloat = 90

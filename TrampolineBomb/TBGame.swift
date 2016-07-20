@@ -6,7 +6,8 @@
 //  Copyright © 2016年 Radioflux. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import SpriteKit
 
 enum GameState {
     case PLAYING
@@ -19,6 +20,12 @@ protocol GameStateListener {
 }
 
 class TBGame {
+
+    init() {
+        player1 = TBPlayer(playerNumber: .One)
+        player2 = TBPlayer(playerNumber: .Two)
+    }
+
     var _state: GameState = .END
     var state: GameState {
         get {
@@ -33,9 +40,27 @@ class TBGame {
         }
     }
 
-    private var listeners = [GameStateListener]()
+    private lazy var listeners = [GameStateListener]()
 
     func listenGameState(listener: GameStateListener) {
         listeners.append(listener)
+    }
+
+    let player1: TBPlayer
+    let player2: TBPlayer
+
+    private lazy var cachedTouches = [PlayerNumber: UITouch](minimumCapacity: 2)
+
+    func receiveNewTouches(touches: Set<UITouch>, inNode node: SKNode) {
+        for touch in touches {
+            let location = touch.locationInNode(node)
+
+            if cachedTouches[.One] == nil {
+                if let offset = player1.isPointNearTrampoline(location) {
+                    player1.dragOffset = offset
+                    cachedTouches[.One] = touch
+                }
+            }
+        }
     }
 }
