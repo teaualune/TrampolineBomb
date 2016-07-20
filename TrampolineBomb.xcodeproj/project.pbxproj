@@ -1,0 +1,327 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E602600E1D3FA94F00082301 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602600D1D3FA94F00082301 /* AppDelegate.swift */; };
+		E60260101D3FA94F00082301 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E602600F1D3FA94F00082301 /* GameScene.sks */; };
+		E60260121D3FA94F00082301 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60260111D3FA94F00082301 /* GameScene.swift */; };
+		E60260141D3FA94F00082301 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60260131D3FA94F00082301 /* GameViewController.swift */; };
+		E60260171D3FA94F00082301 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E60260151D3FA94F00082301 /* Main.storyboard */; };
+		E60260191D3FA94F00082301 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E60260181D3FA94F00082301 /* Assets.xcassets */; };
+		E602601C1D3FA94F00082301 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E602601A1D3FA94F00082301 /* LaunchScreen.storyboard */; };
+		E60260241D3FA96B00082301 /* TBGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60260231D3FA96B00082301 /* TBGame.swift */; };
+		E60260271D3FAA4500082301 /* TBTrampoline.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60260261D3FAA4500082301 /* TBTrampoline.swift */; };
+		E60260291D3FAA9F00082301 /* TBPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60260281D3FAA9F00082301 /* TBPlayer.swift */; };
+		E602602B1D3FAB8E00082301 /* TBStartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602602A1D3FAB8E00082301 /* TBStartButton.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E602600A1D3FA94F00082301 /* TrampolineBomb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrampolineBomb.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E602600D1D3FA94F00082301 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E602600F1D3FA94F00082301 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		E60260111D3FA94F00082301 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		E60260131D3FA94F00082301 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		E60260161D3FA94F00082301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E60260181D3FA94F00082301 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E602601B1D3FA94F00082301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E602601D1D3FA94F00082301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E60260231D3FA96B00082301 /* TBGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBGame.swift; sourceTree = "<group>"; };
+		E60260261D3FAA4500082301 /* TBTrampoline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBTrampoline.swift; sourceTree = "<group>"; };
+		E60260281D3FAA9F00082301 /* TBPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBPlayer.swift; sourceTree = "<group>"; };
+		E602602A1D3FAB8E00082301 /* TBStartButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBStartButton.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E60260071D3FA94F00082301 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E60260011D3FA94F00082301 = {
+			isa = PBXGroup;
+			children = (
+				E602600C1D3FA94F00082301 /* TrampolineBomb */,
+				E602600B1D3FA94F00082301 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E602600B1D3FA94F00082301 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E602600A1D3FA94F00082301 /* TrampolineBomb.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E602600C1D3FA94F00082301 /* TrampolineBomb */ = {
+			isa = PBXGroup;
+			children = (
+				E60260251D3FAA3700082301 /* nodes */,
+				E602600D1D3FA94F00082301 /* AppDelegate.swift */,
+				E602600F1D3FA94F00082301 /* GameScene.sks */,
+				E60260111D3FA94F00082301 /* GameScene.swift */,
+				E60260131D3FA94F00082301 /* GameViewController.swift */,
+				E60260151D3FA94F00082301 /* Main.storyboard */,
+				E60260181D3FA94F00082301 /* Assets.xcassets */,
+				E602601A1D3FA94F00082301 /* LaunchScreen.storyboard */,
+				E602601D1D3FA94F00082301 /* Info.plist */,
+				E60260231D3FA96B00082301 /* TBGame.swift */,
+				E60260281D3FAA9F00082301 /* TBPlayer.swift */,
+			);
+			path = TrampolineBomb;
+			sourceTree = "<group>";
+		};
+		E60260251D3FAA3700082301 /* nodes */ = {
+			isa = PBXGroup;
+			children = (
+				E60260261D3FAA4500082301 /* TBTrampoline.swift */,
+				E602602A1D3FAB8E00082301 /* TBStartButton.swift */,
+			);
+			name = nodes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E60260091D3FA94F00082301 /* TrampolineBomb */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E60260201D3FA94F00082301 /* Build configuration list for PBXNativeTarget "TrampolineBomb" */;
+			buildPhases = (
+				E60260061D3FA94F00082301 /* Sources */,
+				E60260071D3FA94F00082301 /* Frameworks */,
+				E60260081D3FA94F00082301 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TrampolineBomb;
+			productName = TrampolineBomb;
+			productReference = E602600A1D3FA94F00082301 /* TrampolineBomb.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E60260021D3FA94F00082301 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Radioflux;
+				TargetAttributes = {
+					E60260091D3FA94F00082301 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = E60260051D3FA94F00082301 /* Build configuration list for PBXProject "TrampolineBomb" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E60260011D3FA94F00082301;
+			productRefGroup = E602600B1D3FA94F00082301 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E60260091D3FA94F00082301 /* TrampolineBomb */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E60260081D3FA94F00082301 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E60260101D3FA94F00082301 /* GameScene.sks in Resources */,
+				E602601C1D3FA94F00082301 /* LaunchScreen.storyboard in Resources */,
+				E60260191D3FA94F00082301 /* Assets.xcassets in Resources */,
+				E60260171D3FA94F00082301 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E60260061D3FA94F00082301 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E60260291D3FAA9F00082301 /* TBPlayer.swift in Sources */,
+				E60260271D3FAA4500082301 /* TBTrampoline.swift in Sources */,
+				E60260121D3FA94F00082301 /* GameScene.swift in Sources */,
+				E60260141D3FA94F00082301 /* GameViewController.swift in Sources */,
+				E602602B1D3FAB8E00082301 /* TBStartButton.swift in Sources */,
+				E602600E1D3FA94F00082301 /* AppDelegate.swift in Sources */,
+				E60260241D3FA96B00082301 /* TBGame.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E60260151D3FA94F00082301 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E60260161D3FA94F00082301 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E602601A1D3FA94F00082301 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E602601B1D3FA94F00082301 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E602601E1D3FA94F00082301 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E602601F1D3FA94F00082301 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E60260211D3FA94F00082301 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = TrampolineBomb/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.radioflux.TrampolineBomb;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E60260221D3FA94F00082301 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = TrampolineBomb/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.radioflux.TrampolineBomb;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E60260051D3FA94F00082301 /* Build configuration list for PBXProject "TrampolineBomb" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E602601E1D3FA94F00082301 /* Debug */,
+				E602601F1D3FA94F00082301 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E60260201D3FA94F00082301 /* Build configuration list for PBXNativeTarget "TrampolineBomb" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E60260211D3FA94F00082301 /* Debug */,
+				E60260221D3FA94F00082301 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E60260021D3FA94F00082301 /* Project object */;
+}
