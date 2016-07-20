@@ -21,9 +21,25 @@ protocol GameStateListener {
 
 class TBGame {
 
+    let bombFactory = TBBombFactory()
+    private lazy var bombs = [TBBomb]()
+
+    private var turn = 0
+
     init() {
         player1 = TBPlayer(playerNumber: .One)
         player2 = TBPlayer(playerNumber: .Two)
+    }
+
+    func reset(frame: CGRect) {
+        for b in bombs {
+            b.removeFromParent()
+        }
+        bombs.removeAll()
+        cachedTouches.removeAll()
+        player1.setInitialPosition(frame)
+        player2.setInitialPosition(frame)
+        turn = 0
     }
 
     var _state: GameState = .END
@@ -85,12 +101,25 @@ class TBGame {
         }
     }
 
-    func update() {
+    func update(frame: CGRect) {
         if let t1 = cachedTouches[.One] {
             player1.updateTrampolinePosition(t1)
         }
         if let t2 = cachedTouches[.Two] {
             player2.updateTrampolinePosition(t2)
         }
+
+        for b in bombs {
+            b.update()
+            if b.state == .Exploding {
+                //
+            }
+        }
+
+        if bombFactory.shouldMakeBomb(turn) {
+            bombs.append(bombFactory.makeBomb(turn % 2 == 0, inFrame: frame))
+            turn += 1
+        }
+
     }
 }

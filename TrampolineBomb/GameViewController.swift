@@ -73,3 +73,11 @@ func +(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
 func -(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
     return CGPointMake(lhs.x - rhs.x, lhs.y - rhs.y)
 }
+
+func +=(inout lhs: CGPoint, rhs: CGPoint) {
+    lhs = lhs + rhs
+}
+
+func *(lhs: CGFloat, rhs: CGPoint) -> CGPoint {
+    return CGPointMake(lhs * rhs.x, lhs * rhs.y)
+}

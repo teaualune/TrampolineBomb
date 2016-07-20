@@ -18,6 +18,8 @@
 		E60260271D3FAA4500082301 /* TBTrampoline.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60260261D3FAA4500082301 /* TBTrampoline.swift */; };
 		E60260291D3FAA9F00082301 /* TBPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60260281D3FAA9F00082301 /* TBPlayer.swift */; };
 		E602602B1D3FAB8E00082301 /* TBStartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602602A1D3FAB8E00082301 /* TBStartButton.swift */; };
+		E602602D1D3FE2D800082301 /* TBBomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602602C1D3FE2D800082301 /* TBBomb.swift */; };
+		E60260301D3FE79A00082301 /* TBBombFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602602F1D3FE79A00082301 /* TBBombFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		E60260261D3FAA4500082301 /* TBTrampoline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBTrampoline.swift; sourceTree = "<group>"; };
 		E60260281D3FAA9F00082301 /* TBPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBPlayer.swift; sourceTree = "<group>"; };
 		E602602A1D3FAB8E00082301 /* TBStartButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBStartButton.swift; sourceTree = "<group>"; };
+		E602602C1D3FE2D800082301 /* TBBomb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBBomb.swift; sourceTree = "<group>"; };
+		E602602F1D3FE79A00082301 /* TBBombFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBBombFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 		E602600C1D3FA94F00082301 /* TrampolineBomb */ = {
 			isa = PBXGroup;
 			children = (
+				E602602E1D3FE78A00082301 /* game */,
 				E60260251D3FAA3700082301 /* nodes */,
 				E602600D1D3FA94F00082301 /* AppDelegate.swift */,
 				E602600F1D3FA94F00082301 /* GameScene.sks */,
@@ -75,8 +80,6 @@
 				E60260181D3FA94F00082301 /* Assets.xcassets */,
 				E602601A1D3FA94F00082301 /* LaunchScreen.storyboard */,
 				E602601D1D3FA94F00082301 /* Info.plist */,
-				E60260231D3FA96B00082301 /* TBGame.swift */,
-				E60260281D3FAA9F00082301 /* TBPlayer.swift */,
 			);
 			path = TrampolineBomb;
 			sourceTree = "<group>";
@@ -86,8 +89,19 @@
 			children = (
 				E60260261D3FAA4500082301 /* TBTrampoline.swift */,
 				E602602A1D3FAB8E00082301 /* TBStartButton.swift */,
+				E602602C1D3FE2D800082301 /* TBBomb.swift */,
 			);
 			name = nodes;
+			sourceTree = "<group>";
+		};
+		E602602E1D3FE78A00082301 /* game */ = {
+			isa = PBXGroup;
+			children = (
+				E60260231D3FA96B00082301 /* TBGame.swift */,
+				E60260281D3FAA9F00082301 /* TBPlayer.swift */,
+				E602602F1D3FE79A00082301 /* TBBombFactory.swift */,
+			);
+			name = game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,8 +179,10 @@
 				E60260291D3FAA9F00082301 /* TBPlayer.swift in Sources */,
 				E60260271D3FAA4500082301 /* TBTrampoline.swift in Sources */,
 				E60260121D3FA94F00082301 /* GameScene.swift in Sources */,
+				E60260301D3FE79A00082301 /* TBBombFactory.swift in Sources */,
 				E60260141D3FA94F00082301 /* GameViewController.swift in Sources */,
 				E602602B1D3FAB8E00082301 /* TBStartButton.swift in Sources */,
+				E602602D1D3FE2D800082301 /* TBBomb.swift in Sources */,
 				E602600E1D3FA94F00082301 /* AppDelegate.swift in Sources */,
 				E60260241D3FA96B00082301 /* TBGame.swift in Sources */,
 			);

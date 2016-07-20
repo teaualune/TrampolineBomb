@@ -11,7 +11,7 @@ import SpriteKit
 let Z_POS_TRAMPOLINE_BG: CGFloat = 100
 
 class TBTrampoline : SKNode {
-    private var background: SKSpriteNode
+    private let background: SKSpriteNode
 
     init(backgroundName: String, size: CGSize) {
         background = SKSpriteNode(imageNamed: backgroundName)
