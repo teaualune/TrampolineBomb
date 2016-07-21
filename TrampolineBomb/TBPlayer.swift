@@ -122,6 +122,12 @@ class TBPlayer {
         guard let parent = trampoline.parent else { return }
         trampoline.position = touch.locationInNode(parent) - dragOffset
     }
+
+    func reset() {
+        hp = MAX_HP
+        cachedHP = hp
+        playerLabel.text = getLabelText()
+    }
 }
 
 private let MAX_HP: Int = 5

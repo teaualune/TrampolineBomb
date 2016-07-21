@@ -41,6 +41,7 @@ class TBStartButton : SKLabelNode, GameStateListener {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         _touching = false
         if let g = game {
+            g.reset(g.frame)
             g.state = .PLAYING
         }
     }
