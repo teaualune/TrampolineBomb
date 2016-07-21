@@ -38,6 +38,7 @@ class TBGame {
         player2 = TBPlayer(playerNumber: .Two)
 
         gameOverLabel.fontSize = 45
+        gameOverLabel.zPosition = 1000
         root.addChild(gameOverLabel)
     }
 
