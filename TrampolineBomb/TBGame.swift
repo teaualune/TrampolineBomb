@@ -21,6 +21,7 @@ protocol GameStateListener {
 
 class TBGame {
 
+    var frame: CGRect = CGRectZero
     let bombFactory = TBBombFactory()
     private lazy var bombs = [TBBomb]()
 
@@ -32,6 +33,9 @@ class TBGame {
     }
 
     func reset(frame: CGRect) {
+        self.frame = frame
+        bombFactory.upperRange = player2.dragYRange
+        bombFactory.lowerRange = player1.dragYRange
         for b in bombs {
             b.removeFromParent()
         }
@@ -101,25 +105,48 @@ class TBGame {
         }
     }
 
-    func update(frame: CGRect) {
-        if let t1 = cachedTouches[.One] {
-            player1.updateTrampolinePosition(t1)
-        }
-        if let t2 = cachedTouches[.Two] {
-            player2.updateTrampolinePosition(t2)
-        }
+    func update() {
+        player1.update(cachedTouches[.One])
+        player2.update(cachedTouches[.Two])
 
-        for b in bombs {
+        for (i, b) in bombs.enumerate() {
             b.update()
-            if b.state == .Exploding {
-                //
+            if b.zHeight < 0 {
+                checkCollision(b)
+                if b.state == .Exploding {
+                    handleExplosion(b)
+                } else if i == 0 {
+                    turn += 1
+                }
             }
         }
 
         if bombFactory.shouldMakeBomb(turn) {
-            bombs.append(bombFactory.makeBomb(turn % 2 == 0, inFrame: frame))
+            bombs.append(bombFactory.makeBomb(turn % 2 == 0))
             turn += 1
         }
 
     }
+
+    private func checkCollision(bomb: TBBomb) {
+        if CGPoint.distance(bomb.position, second: player1.trampoline.position) < COLLISION_THRESHOLD {
+            bombFactory.resetBombNextState(bomb, isUpper: true)
+        } else if CGPoint.distance(bomb.position, second: player2.trampoline.position) < COLLISION_THRESHOLD {
+            bombFactory.resetBombNextState(bomb, isUpper: false)
+        } else {
+            bomb.state = .Exploding
+        }
+    }
+
+    private func handleExplosion(bomb: TBBomb) {
+        let y = bomb.position.y
+        let mid = CGRectGetMidY(frame)
+        if y > mid {
+            player2.hp -= 1
+        } else {
+            player1.hp -= 1
+        }
+    }
 }
+
+private let COLLISION_THRESHOLD: CGFloat = 70

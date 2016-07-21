@@ -29,39 +29,49 @@ class TBPlayer {
     let playerNumber: PlayerNumber
 
     var dragOffset: CGPoint = CGPointZero
+    var dragYRange: SKRange = SKRange()
 
     init(playerNumber: PlayerNumber) {
         self.playerNumber = playerNumber
+
         switch playerNumber {
         case .One:
             trampoline = TBTrampoline(backgroundName: "trampoline1", size: SIZE)
-            playerLabel = SKLabelNode(text: "player 1")
             break
         case .Two:
             trampoline = TBTrampoline(backgroundName: "trampoline2", size: SIZE)
             trampoline.zRotation = CGFloat(M_PI)
-            playerLabel = SKLabelNode(text: "player 2")
-            playerLabel.zRotation = CGFloat(M_PI)
             break
         }
+
+        playerLabel = SKLabelNode(fontNamed: "Chalkduster")
+        playerLabel.text = getLabelText()
         playerLabel.fontName = "Chalkduster"
         playerLabel.fontSize = 20
+        if playerNumber == .Two {
+            playerLabel.zRotation = CGFloat(M_PI)
+        }
+    }
+
+    private func getLabelText() -> String {
+        return "player \(playerNumber.rawValue + 1), HP = \(hp)"
     }
 
     func addPlayer(toNode: SKNode, frame: CGRect) {
 
-        let yRange: SKRange
         let halfTrampolineHeight = SIZE.height / 2 - 10
         switch playerNumber {
         case .One:
-            yRange = SKRange(lowerLimit: CGRectGetMinY(frame) + halfTrampolineHeight, upperLimit: CGRectGetMidY(frame) - halfTrampolineHeight - 30)
+            dragYRange.lowerLimit = CGRectGetMinY(frame) + halfTrampolineHeight
+            dragYRange.upperLimit = CGRectGetMidY(frame) - halfTrampolineHeight - 30
             break
         case .Two:
-            yRange = SKRange(lowerLimit: CGRectGetMidY(frame) + halfTrampolineHeight + 30, upperLimit: CGRectGetMaxY(frame) - halfTrampolineHeight)
+            dragYRange.lowerLimit = CGRectGetMidY(frame) + halfTrampolineHeight + 30
+            dragYRange.upperLimit = CGRectGetMaxY(frame) - halfTrampolineHeight
         }
 
         let halfTrampolineWidth = SIZE.width / 2 - 10
-        trampoline.constraints = [SKConstraint.positionX(SKRange(lowerLimit: CGRectGetMinX(frame) + halfTrampolineWidth, upperLimit: CGRectGetMaxX(frame) - halfTrampolineWidth), y: yRange)]
+        trampoline.constraints = [SKConstraint.positionX(SKRange(lowerLimit: CGRectGetMinX(frame) + halfTrampolineWidth, upperLimit: CGRectGetMaxX(frame) - halfTrampolineWidth), y: dragYRange)]
 
         setInitialPosition(frame)
 
@@ -95,7 +105,20 @@ class TBPlayer {
         }
     }
 
-    func updateTrampolinePosition(touch: UITouch) {
+    private var cachedHP = MAX_HP
+
+    func update(touch: UITouch?) {
+        if let t = touch {
+            updateTrampolinePosition(t)
+        }
+
+        if hp != cachedHP {
+            playerLabel.text = getLabelText()
+            cachedHP = hp
+        }
+    }
+
+    private func updateTrampolinePosition(touch: UITouch) {
         guard let parent = trampoline.parent else { return }
         trampoline.position = touch.locationInNode(parent) - dragOffset
     }

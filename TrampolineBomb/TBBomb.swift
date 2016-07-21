@@ -63,10 +63,6 @@ class TBBomb : SKNode {
             zHeight = getParabolaHeight(2 * jumpedDistance / jumpDistance - 1) + 0.1
             sprite.setScale(scaleByHeight)
         }
-
-        if zHeight < 0 {
-            state = .Exploding
-        }
     }
 
     private var scaleByHeight: CGFloat {

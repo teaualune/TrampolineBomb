@@ -14,15 +14,16 @@ class GameScene: SKScene {
 
     private let root = SKNode()
     override func didMoveToView(view: SKView) {
-        game.state = .END
 
-//        root.userInteractionEnabled = true
         self.addChild(root)
 
         root.addChild(setupBgNode(self.frame))
 
         game.player1.addPlayer(root, frame: self.frame)
         game.player2.addPlayer(root, frame: self.frame)
+
+        game.state = .END
+        game.reset(self.frame)
 
         let startLabel = TBStartButton(fontNamed: "Chalkduster")
         startLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
