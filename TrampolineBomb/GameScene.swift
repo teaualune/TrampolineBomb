@@ -12,15 +12,14 @@ class GameScene: SKScene {
 
     private let game = TBGame()
 
-    private let root = SKNode()
     override func didMoveToView(view: SKView) {
 
-        self.addChild(root)
+        self.addChild(game.root)
 
-        root.addChild(setupBgNode(self.frame))
+        game.root.addChild(setupBgNode(self.frame))
 
-        game.player1.addPlayer(root, frame: self.frame)
-        game.player2.addPlayer(root, frame: self.frame)
+        game.player1.addPlayer(game.root, frame: self.frame)
+        game.player2.addPlayer(game.root, frame: self.frame)
 
         game.state = .END
         game.reset(self.frame)
@@ -29,7 +28,7 @@ class GameScene: SKScene {
         startLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
         startLabel.game = game
         game.listenGameState(startLabel)
-        root.addChild(startLabel)
+        game.root.addChild(startLabel)
     }
 
     private func setupBgNode(frame: CGRect) -> SKNode {
@@ -45,7 +44,7 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         if game.state == .PLAYING {
-            game.receiveNewTouches(touches, inNode: root)
+            game.receiveNewTouches(touches)
         }
     }
 

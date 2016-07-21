@@ -21,6 +21,7 @@ protocol GameStateListener {
 
 class TBGame {
 
+    let root = SKNode()
     var frame: CGRect = CGRectZero
     let bombFactory = TBBombFactory()
     private lazy var bombs = [TBBomb]()
@@ -36,13 +37,17 @@ class TBGame {
         self.frame = frame
         bombFactory.upperRange = player2.dragYRange
         bombFactory.lowerRange = player1.dragYRange
+        bombFactory.fieldWidth = frame.size.width
+
         for b in bombs {
             b.removeFromParent()
         }
         bombs.removeAll()
+
         cachedTouches.removeAll()
         player1.setInitialPosition(frame)
         player2.setInitialPosition(frame)
+
         turn = 0
     }
 
@@ -71,13 +76,13 @@ class TBGame {
 
     private lazy var cachedTouches = [PlayerNumber: UITouch](minimumCapacity: 2)
 
-    func receiveNewTouches(touches: Set<UITouch>, inNode node: SKNode) {
+    func receiveNewTouches(touches: Set<UITouch>) {
         if cachedTouches.count == 2 {
             return
         }
 
         for touch in touches {
-            let location = touch.locationInNode(node)
+            let location = touch.locationInNode(root)
             if handleTouch(touch, withLocation: location, forPlayer: player1) { break }
             handleTouch(touch, withLocation: location, forPlayer: player2)
         }
@@ -122,7 +127,11 @@ class TBGame {
         }
 
         if bombFactory.shouldMakeBomb(turn) {
-            bombs.append(bombFactory.makeBomb(turn % 2 == 0))
+            let isUpper = turn % 2 == 0
+            let position = isUpper ? player1.trampoline.position : player2.trampoline.position
+            let newBomb = bombFactory.makeBomb(isUpper, targetPosition: position)
+            bombs.append(newBomb)
+            root.addChild(newBomb)
             turn += 1
         }
 

@@ -15,13 +15,13 @@ class TBBombFactory {
 
     var fieldWidth: CGFloat = 0
 
-    func makeBomb(isUpper: Bool) -> TBBomb {
+    func makeBomb(isUpper: Bool, targetPosition: CGPoint) -> TBBomb {
         let bomb = TBBomb()
-        let size = bomb.frame.width
-        let x = 2 * (getHalfBool() ? -size : size) + fieldWidth
+        let size = BOMB_SIZE.width
+        let x = getHalfBool() ? -2*size : fieldWidth + 2*size
         let y = getRandBetween(isUpper ? upperRange : lowerRange)
         bomb.position = CGPointMake(x, y)
-        resetBombNextState(bomb, isUpper: isUpper)
+        resetBombNextState(bomb, isUpper: isUpper, assignPosition: targetPosition)
         return bomb
     }
 
@@ -33,15 +33,15 @@ class TBBombFactory {
         return CGPointMake(getRandBetween(fieldWidth, lower: 0), getRandBetween(yRange.upperLimit, lower: yRange.lowerLimit))
     }
 
-    func resetBombNextState(bomb: TBBomb, isUpper: Bool) {
-        bomb.initiateNewDirection(pickTargetPosition(isUpper ? upperRange : lowerRange), newSpeed: getRand() + 1)
+    func resetBombNextState(bomb: TBBomb, isUpper: Bool, assignPosition: CGPoint? = nil) {
+        bomb.initiateNewDirection(assignPosition ?? pickTargetPosition(isUpper ? upperRange : lowerRange), newSpeed: getRand() + 1)
     }
 }
 
 private let CREATE_BOMB_AT: [Int] = [0, 15, 24, 29, 34]
 
 private func getRand() -> CGFloat {
-    return CGFloat(Float(arc4random()) / Float(RAND_MAX))
+    return CGFloat(arc4random_uniform(100)) / 100
 }
 
 private func getHalfBool() -> Bool {

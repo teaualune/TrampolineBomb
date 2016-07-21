@@ -37,6 +37,7 @@ class TBBomb : SKNode {
     override init() {
         sprite = SKSpriteNode(imageNamed: "bomb")
         sprite.zPosition = Z_POS
+        sprite.size = BOMB_SIZE
         super.init()
         self.addChild(sprite)
     }
@@ -72,9 +73,10 @@ class TBBomb : SKNode {
     }
 }
 
+let BOMB_SIZE = CGSizeMake(30, 30)
+
 private let Z_POS: CGFloat = 200
-private let SIZE = CGSizeMake(30, 30)
-private let SPEED_MULTIPLIER: CGFloat = 10
+private let SPEED_MULTIPLIER: CGFloat = 3
 
 private func getParabolaHeight(x: CGFloat) -> CGFloat {
     // y = 1 - x^2, -1 <= x <= 1
