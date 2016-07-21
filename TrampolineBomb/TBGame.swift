@@ -29,7 +29,7 @@ class TBGame {
     private var turn = 0
     private var exploding = false
 
-    let explodeAction = SKAction.scaleTo(0.01, duration: 3)
+    let explodeAction = SKAction.scaleTo(0.01, duration: 0)
 
     private let gameOverLabel = SKLabelNode(fontNamed: "Chalkduster")
 
@@ -142,8 +142,8 @@ class TBGame {
                 checkCollision(b)
                 if b.state == .Exploding {
                     handleExplosion(b)
-                    exploding = true
-                    cachedTouches.removeAll()
+//                    exploding = true
+//                    cachedTouches.removeAll()
                 } else if i == 0 {
                     turn += 1
                 }
@@ -172,8 +172,24 @@ class TBGame {
             makeBomb()
         }
 
+        if let smoke = SKEmitterNode(fileNamed: "TBSmokeParticle.sks"),
+            let explosion = SKEmitterNode(fileNamed: "TBExplodeParticle.sks") {
+            explosion.position = bomb.position
+            explosion.targetNode = root
+            explosion.zPosition = 1000
+            smoke.position = bomb.position
+            smoke.targetNode = root
+            smoke.zPosition = 1000
+            root.addChild(smoke)
+            root.addChild(explosion)
+            root.runAction(SKAction.waitForDuration(2)) {
+                explosion.removeFromParent()
+                smoke.removeFromParent()
+            }
+        }
+
         bomb.runAction(explodeAction) {
-            self.exploding = false
+//            self.exploding = false
             bomb.removeFromParent()
 
             let y = bomb.position.y

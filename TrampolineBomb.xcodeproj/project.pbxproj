@@ -20,6 +20,9 @@
 		E602602B1D3FAB8E00082301 /* TBStartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602602A1D3FAB8E00082301 /* TBStartButton.swift */; };
 		E602602D1D3FE2D800082301 /* TBBomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602602C1D3FE2D800082301 /* TBBomb.swift */; };
 		E60260301D3FE79A00082301 /* TBBombFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602602F1D3FE79A00082301 /* TBBombFactory.swift */; };
+		E602603F1D40981500082301 /* TBExplodeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = E602603D1D40981500082301 /* TBExplodeParticle.sks */; };
+		E60260401D40981500082301 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = E602603E1D40981500082301 /* spark.png */; };
+		E60260421D4099B600082301 /* TBSmokeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = E60260411D4099B600082301 /* TBSmokeParticle.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		E602602A1D3FAB8E00082301 /* TBStartButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBStartButton.swift; sourceTree = "<group>"; };
 		E602602C1D3FE2D800082301 /* TBBomb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBBomb.swift; sourceTree = "<group>"; };
 		E602602F1D3FE79A00082301 /* TBBombFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBBombFactory.swift; sourceTree = "<group>"; };
+		E602603D1D40981500082301 /* TBExplodeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TBExplodeParticle.sks; sourceTree = "<group>"; };
+		E602603E1D40981500082301 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		E60260411D4099B600082301 /* TBSmokeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TBSmokeParticle.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +96,9 @@
 				E60260261D3FAA4500082301 /* TBTrampoline.swift */,
 				E602602A1D3FAB8E00082301 /* TBStartButton.swift */,
 				E602602C1D3FE2D800082301 /* TBBomb.swift */,
+				E602603D1D40981500082301 /* TBExplodeParticle.sks */,
+				E602603E1D40981500082301 /* spark.png */,
+				E60260411D4099B600082301 /* TBSmokeParticle.sks */,
 			);
 			name = nodes;
 			sourceTree = "<group>";
@@ -163,6 +172,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E60260101D3FA94F00082301 /* GameScene.sks in Resources */,
+				E60260401D40981500082301 /* spark.png in Resources */,
+				E602603F1D40981500082301 /* TBExplodeParticle.sks in Resources */,
+				E60260421D4099B600082301 /* TBSmokeParticle.sks in Resources */,
 				E602601C1D3FA94F00082301 /* LaunchScreen.storyboard in Resources */,
 				E60260191D3FA94F00082301 /* Assets.xcassets in Resources */,
 				E60260171D3FA94F00082301 /* Main.storyboard in Resources */,
