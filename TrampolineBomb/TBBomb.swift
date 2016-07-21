@@ -18,6 +18,8 @@ class TBBomb : SKNode {
     private let sprite: SKSpriteNode
     var state = TBBombState.Normal
 
+    private let shadow: SKShapeNode
+
     var bombSpeed: CGPoint = CGPointZero
     var zHeight: CGFloat = 1
 
@@ -38,7 +40,13 @@ class TBBomb : SKNode {
         sprite = SKSpriteNode(imageNamed: "bomb")
         sprite.zPosition = Z_POS
         sprite.size = BOMB_SIZE
+
+        shadow = SKShapeNode(ellipseOfSize: CGSizeMake(BOMB_SIZE.width, BOMB_SIZE.height / 2))
+        shadow.fillColor = UIColor.blackColor()
+        shadow.zPosition = Z_POS - 1
+
         super.init()
+        self.addChild(shadow)
         self.addChild(sprite)
     }
 
@@ -63,6 +71,7 @@ class TBBomb : SKNode {
             jumpedDistance += hypot(bombSpeed.x, bombSpeed.y)
             zHeight = getParabolaHeight(2 * jumpedDistance / jumpDistance - 1) + 0.1
             sprite.setScale(scaleByHeight)
+            sprite.position.y = BOMB_SIZE.height * (zHeight * 2 + 0.5)
         }
     }
 
