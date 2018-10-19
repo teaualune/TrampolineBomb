@@ -23,6 +23,7 @@
 		E602603F1D40981500082301 /* TBExplodeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = E602603D1D40981500082301 /* TBExplodeParticle.sks */; };
 		E60260401D40981500082301 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = E602603E1D40981500082301 /* spark.png */; };
 		E60260421D4099B600082301 /* TBSmokeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = E60260411D4099B600082301 /* TBSmokeParticle.sks */; };
+		E6355A1B217A1653002EB7CB /* CGPoint+TrampolineBomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6355A1A217A1653002EB7CB /* CGPoint+TrampolineBomb.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		E602603D1D40981500082301 /* TBExplodeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TBExplodeParticle.sks; sourceTree = "<group>"; };
 		E602603E1D40981500082301 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		E60260411D4099B600082301 /* TBSmokeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TBSmokeParticle.sks; sourceTree = "<group>"; };
+		E6355A1A217A1653002EB7CB /* CGPoint+TrampolineBomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+TrampolineBomb.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				E60260181D3FA94F00082301 /* Assets.xcassets */,
 				E602601A1D3FA94F00082301 /* LaunchScreen.storyboard */,
 				E602601D1D3FA94F00082301 /* Info.plist */,
+				E6355A1A217A1653002EB7CB /* CGPoint+TrampolineBomb.swift */,
 			);
 			path = TrampolineBomb;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				E602602D1D3FE2D800082301 /* TBBomb.swift in Sources */,
 				E602600E1D3FA94F00082301 /* AppDelegate.swift in Sources */,
 				E60260241D3FA96B00082301 /* TBGame.swift in Sources */,
+				E6355A1B217A1653002EB7CB /* CGPoint+TrampolineBomb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,14 +9,14 @@
 import SpriteKit
 
 enum TBBombState {
-    case Normal
-    case Exploding
+    case normal
+    case exploding
 }
 
 class TBBomb : SKNode {
 
     private let sprite: SKSpriteNode
-    var state = TBBombState.Normal
+    var state = TBBombState.normal
 
     private let shadow: SKShapeNode
 
@@ -66,7 +66,7 @@ class TBBomb : SKNode {
     }
 
     func update() {
-        if state == .Normal {
+        if state == .normal {
             self.position += bombSpeed
             jumpedDistance += hypot(bombSpeed.x, bombSpeed.y)
             zHeight = getParabolaHeight(x: 2 * jumpedDistance / jumpDistance - 1) + 0.1

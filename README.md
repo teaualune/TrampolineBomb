@@ -8,7 +8,7 @@ SpriteKit practice to remake the [old mini-game](http://www.mariowiki.com/Bob-om
 ### Tech Stacks
 
 * SpriteKit
-* Swift 2.x
+* Swift 4.2
 
 ### License
 

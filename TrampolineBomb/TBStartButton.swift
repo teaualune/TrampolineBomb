@@ -13,7 +13,7 @@ class TBStartButton : SKLabelNode, GameStateListener {
     var game: TBGame?
 
     func gameStateChanged(newState: GameState, oldState: GameState) {
-        self.isHidden = newState == .PLAYING
+        self.isHidden = newState == .playing
         self.isUserInteractionEnabled = !self.isHidden
     }
 
@@ -21,7 +21,7 @@ class TBStartButton : SKLabelNode, GameStateListener {
         super.init(fontNamed: fontName)
         self.text = "Start"
         self.fontSize = 45
-        self.gameStateChanged(newState: .END, oldState: .END)
+        self.gameStateChanged(newState: .ended, oldState: .ended)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -42,7 +42,7 @@ class TBStartButton : SKLabelNode, GameStateListener {
         _touching = false
         if let g = game {
             g.reset(frame: g.frame)
-            g.state = .PLAYING
+            g.state = .playing
         }
     }
 

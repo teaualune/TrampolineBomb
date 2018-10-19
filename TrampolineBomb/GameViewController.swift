@@ -37,10 +37,6 @@ class GameViewController: UIViewController {
             skView.presentScene(scene)
         }
     }
-
-//    override func shouldAutorotate() -> Bool {
-//        return true
-//    }
     
     override var shouldAutorotate: Bool {
         return true
@@ -62,26 +58,4 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
-}
-
-extension CGPoint {
-    static func distance(first: CGPoint, second: CGPoint) -> CGFloat {
-        return CGFloat(hypotf(Float(second.x - first.x), Float(second.y - first.y)))
-    }
-}
-
-func +(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
-    return CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
-}
-
-func -(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
-    return CGPoint(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
-}
-
-func +=( lhs: inout CGPoint, rhs: CGPoint) {
-    lhs = lhs + rhs
-}
-
-func *(lhs: CGFloat, rhs: CGPoint) -> CGPoint {
-    return CGPoint(x: lhs * rhs.x, y: lhs * rhs.y)
 }

@@ -10,9 +10,9 @@ import UIKit
 import SpriteKit
 
 enum GameState {
-    case PLAYING
-    case END
-    case STOPPED
+    case playing
+    case ended
+    case stopped
 }
 
 protocol GameStateListener {
@@ -67,14 +67,15 @@ class TBGame {
         gameOverLabel.isHidden = true
     }
 
-    var _state: GameState = .END
+    private var _state = GameState.ended
+
     var state: GameState {
         get {
-            return _state
+            return self._state
         }
         set {
-            let old = _state
-            _state = newValue
+            let old = self._state
+            self._state = newValue
             for listener in listeners {
                 listener.gameStateChanged(newState: newValue, oldState: old)
             }
@@ -141,7 +142,7 @@ class TBGame {
             b.update()
             if b.zHeight < 0 {
                 checkCollision(bomb: b)
-                if b.state == .Exploding {
+                if b.state == .exploding {
                     handleExplosion(bomb: b)
 //                    exploding = true
 //                    cachedTouches.removeAll()
@@ -162,7 +163,7 @@ class TBGame {
         } else if CGPoint.distance(first: bomb.position, second: player2.trampoline.position) < COLLISION_THRESHOLD {
             bombFactory.resetBombNextState(bomb: bomb, isUpper: false)
         } else {
-            bomb.state = .Exploding
+            bomb.state = .exploding
         }
     }
 
@@ -218,7 +219,7 @@ class TBGame {
         gameOverLabel.text = "player \(winner.playerNumber.rawValue + 1) wins!!"
         gameOverLabel.isHidden = false
         gameOverLabel.run(SKAction.wait(forDuration: 5)) {
-            self.state = .END
+            self.state = .ended
             self.reset(frame: self.frame)
         }
     }

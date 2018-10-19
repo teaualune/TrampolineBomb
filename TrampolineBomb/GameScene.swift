@@ -21,7 +21,7 @@ class GameScene: SKScene {
         game.player1.addPlayer(toNode: game.root, frame: self.frame)
         game.player2.addPlayer(toNode: game.root, frame: self.frame)
 
-        game.state = .END
+        game.state = .ended
         game.reset(frame: self.frame)
 
         let startLabel = TBStartButton(fontNamed: "Chalkduster")
@@ -43,26 +43,26 @@ class GameScene: SKScene {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
        /* Called when a touch begins */
-        if game.state == .PLAYING {
+        if game.state == .playing {
             game.receiveNewTouches(touches: touches)
         }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if game.state == .PLAYING {
+        if game.state == .playing {
             game.removeTouches(touches: touches)
         }
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
-        if let t = touches, game.state == .PLAYING {
+        if let t = touches, game.state == .playing {
             game.removeTouches(touches: t)
         }
     }
 
     override func update(_ currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-        if game.state == .PLAYING {
+        if game.state == .playing {
             game.update()
         }
     }
