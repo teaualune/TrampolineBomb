@@ -22,20 +22,20 @@ protocol GameStateListener {
 class TBGame {
 
     let root = SKNode()
-    var frame: CGRect = CGRectZero
+    var frame: CGRect = CGRect.zero
     let bombFactory = TBBombFactory()
     private lazy var bombs = [TBBomb]()
 
     private var turn = 0
     private var exploding = false
 
-    let explodeAction = SKAction.scaleTo(0.01, duration: 0)
+    let explodeAction = SKAction.scale(to: 0.01, duration: 0)
 
     private let gameOverLabel = SKLabelNode(fontNamed: "Chalkduster")
 
     init() {
-        player1 = TBPlayer(playerNumber: .One)
-        player2 = TBPlayer(playerNumber: .Two)
+        player1 = TBPlayer(playerNumber: .one)
+        player2 = TBPlayer(playerNumber: .two)
 
         gameOverLabel.fontSize = 45
         gameOverLabel.zPosition = 1000
@@ -57,14 +57,14 @@ class TBGame {
         bombs.removeAll()
 
         cachedTouches.removeAll()
-        player1.setInitialPosition(frame)
-        player2.setInitialPosition(frame)
+        player1.setInitialPosition(frame: frame)
+        player2.setInitialPosition(frame: frame)
 
         turn = 0
         exploding = false
 
-        gameOverLabel.position = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame))
-        gameOverLabel.hidden = true
+        gameOverLabel.position = CGPoint(x: frame.midX, y: frame.midY)
+        gameOverLabel.isHidden = true
     }
 
     var _state: GameState = .END
@@ -76,7 +76,7 @@ class TBGame {
             let old = _state
             _state = newValue
             for listener in listeners {
-                listener.gameStateChanged(newValue, oldState: old)
+                listener.gameStateChanged(newState: newValue, oldState: old)
             }
         }
     }
@@ -98,15 +98,15 @@ class TBGame {
         }
 
         for touch in touches {
-            let location = touch.locationInNode(root)
-            if handleTouch(touch, withLocation: location, forPlayer: player1) { break }
-            handleTouch(touch, withLocation: location, forPlayer: player2)
+            let location = touch.location(in: root)
+            if handleTouch(touch: touch, withLocation: location, forPlayer: player1) { break }
+            _ = handleTouch(touch: touch, withLocation: location, forPlayer: player2)
         }
     }
 
     private func handleTouch(touch: UITouch, withLocation location: CGPoint, forPlayer player: TBPlayer) -> Bool {
         if cachedTouches[player.playerNumber] == nil {
-            if let offset = player.isPointNearTrampoline(location) {
+            if let offset = player.isPointNearTrampoline(point: location) {
                 player.dragOffset = offset
                 cachedTouches[player.playerNumber] = touch
                 return true
@@ -117,11 +117,11 @@ class TBGame {
 
     func removeTouches(touches: Set<UITouch>) {
         for t in touches {
-            if cachedTouches[.One] == t {
-                cachedTouches.removeValueForKey(.One)
+            if cachedTouches[.one] == t {
+                cachedTouches.removeValue(forKey: .one)
             }
-            if cachedTouches[.Two] == t {
-                cachedTouches.removeValueForKey(.Two)
+            if cachedTouches[.two] == t {
+                cachedTouches.removeValue(forKey: .two)
             }
         }
     }
@@ -129,20 +129,20 @@ class TBGame {
     func update() {
         if exploding { return }
 
-        player1.update(cachedTouches[.One])
-        player2.update(cachedTouches[.Two])
+        player1.update(touch: cachedTouches[.one])
+        player2.update(touch: cachedTouches[.two])
 
         if player1.hp == 0 || player2.hp == 0 {
-            gameOver(player1.hp == 0 ? player2 : player1)
+            gameOver(winner: player1.hp == 0 ? player2 : player1)
             return
         }
 
-        for (i, b) in bombs.enumerate() {
+        for (i, b) in bombs.enumerated() {
             b.update()
             if b.zHeight < 0 {
-                checkCollision(b)
+                checkCollision(bomb: b)
                 if b.state == .Exploding {
-                    handleExplosion(b)
+                    handleExplosion(bomb: b)
 //                    exploding = true
 //                    cachedTouches.removeAll()
                 } else if i == 0 {
@@ -151,16 +151,16 @@ class TBGame {
             }
         }
 
-        if bombFactory.shouldMakeBomb(turn) {
+        if bombFactory.shouldMakeBomb(turn: turn) {
             makeBomb()
         }
     }
 
     private func checkCollision(bomb: TBBomb) {
-        if CGPoint.distance(bomb.position, second: player1.trampoline.position) < COLLISION_THRESHOLD {
-            bombFactory.resetBombNextState(bomb, isUpper: true)
-        } else if CGPoint.distance(bomb.position, second: player2.trampoline.position) < COLLISION_THRESHOLD {
-            bombFactory.resetBombNextState(bomb, isUpper: false)
+        if CGPoint.distance(first: bomb.position, second: player1.trampoline.position) < COLLISION_THRESHOLD {
+            bombFactory.resetBombNextState(bomb: bomb, isUpper: true)
+        } else if CGPoint.distance(first: bomb.position, second: player2.trampoline.position) < COLLISION_THRESHOLD {
+            bombFactory.resetBombNextState(bomb: bomb, isUpper: false)
         } else {
             bomb.state = .Exploding
         }
@@ -168,7 +168,9 @@ class TBGame {
 
     private func handleExplosion(bomb: TBBomb) {
 
-        if let idx = bombs.indexOf(bomb) { bombs.removeAtIndex(idx) }
+        if let idx = bombs.firstIndex(of: bomb) {
+            bombs.remove(at: idx)
+        }
         if bombs.count == 0 {
             makeBomb()
         }
@@ -183,18 +185,18 @@ class TBGame {
             smoke.zPosition = 1000
             root.addChild(smoke)
             root.addChild(explosion)
-            root.runAction(SKAction.waitForDuration(2)) {
+            root.run(SKAction.wait(forDuration: 2)) {
                 explosion.removeFromParent()
                 smoke.removeFromParent()
             }
         }
 
-        bomb.runAction(explodeAction) {
+        bomb.run(explodeAction) {
 //            self.exploding = false
             bomb.removeFromParent()
 
             let y = bomb.position.y
-            let mid = CGRectGetMidY(self.frame)
+            let mid = self.frame.midY
             if y > mid {
                 self.player2.hp -= 1
             } else {
@@ -206,7 +208,7 @@ class TBGame {
     private func makeBomb() {
         let isUpper = turn % 2 == 0
         let position = isUpper ? player1.trampoline.position : player2.trampoline.position
-        let newBomb = bombFactory.makeBomb(isUpper, targetPosition: position)
+        let newBomb = bombFactory.makeBomb(isUpper: isUpper, targetPosition: position)
         bombs.append(newBomb)
         root.addChild(newBomb)
         turn += 1
@@ -214,10 +216,10 @@ class TBGame {
 
     private func gameOver(winner: TBPlayer) {
         gameOverLabel.text = "player \(winner.playerNumber.rawValue + 1) wins!!"
-        gameOverLabel.hidden = false
-        gameOverLabel.runAction(SKAction.waitForDuration(5)) { 
+        gameOverLabel.isHidden = false
+        gameOverLabel.run(SKAction.wait(forDuration: 5)) {
             self.state = .END
-            self.reset(self.frame)
+            self.reset(frame: self.frame)
         }
     }
 }

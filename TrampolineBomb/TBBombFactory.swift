@@ -19,22 +19,22 @@ class TBBombFactory {
         let bomb = TBBomb()
         let size = BOMB_SIZE.width
         let x = getHalfBool() ? -2*size : fieldWidth + 2*size
-        let y = getRandBetween(isUpper ? upperRange : lowerRange)
-        bomb.position = CGPointMake(x, y)
-        resetBombNextState(bomb, isUpper: isUpper, assignPosition: targetPosition)
+        let y = getRandBetween(range: isUpper ? upperRange : lowerRange)
+        bomb.position = CGPoint(x: x, y: y)
+        resetBombNextState(bomb: bomb, isUpper: isUpper, assignPosition: targetPosition)
         return bomb
     }
 
     func shouldMakeBomb(turn: Int) -> Bool {
-        return CREATE_BOMB_AT.indexOf(turn) != nil
+        return CREATE_BOMB_AT.firstIndex(of: turn) != nil
     }
 
     func pickTargetPosition(yRange: SKRange) -> CGPoint {
-        return CGPointMake(getRandBetween(fieldWidth, lower: 0), getRandBetween(yRange.upperLimit, lower: yRange.lowerLimit))
+        return CGPoint(x: getRandBetween(upper: fieldWidth, lower: 0), y: getRandBetween(upper: yRange.upperLimit, lower: yRange.lowerLimit))
     }
 
     func resetBombNextState(bomb: TBBomb, isUpper: Bool, assignPosition: CGPoint? = nil) {
-        bomb.initiateNewDirection(assignPosition ?? pickTargetPosition(isUpper ? upperRange : lowerRange), newSpeed: getRand() + 1)
+        bomb.initiateNewDirection(target: assignPosition ?? pickTargetPosition(yRange: isUpper ? upperRange : lowerRange), newSpeed: getRand() + 1)
     }
 }
 
@@ -49,7 +49,7 @@ private func getHalfBool() -> Bool {
 }
 
 private func getRandBetween(range: SKRange) -> CGFloat {
-    return getRandBetween(range.upperLimit, lower: range.lowerLimit)
+    return getRandBetween(upper: range.upperLimit, lower: range.lowerLimit)
 }
 
 private func getRandBetween(upper: CGFloat, lower: CGFloat) -> CGFloat {

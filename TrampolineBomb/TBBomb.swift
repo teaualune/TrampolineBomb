@@ -20,7 +20,7 @@ class TBBomb : SKNode {
 
     private let shadow: SKShapeNode
 
-    var bombSpeed: CGPoint = CGPointZero
+    var bombSpeed: CGPoint = CGPoint.zero
     var zHeight: CGFloat = 1
 
     private var _jumpDistance: CGFloat = 1
@@ -41,8 +41,8 @@ class TBBomb : SKNode {
         sprite.zPosition = Z_POS
         sprite.size = BOMB_SIZE
 
-        shadow = SKShapeNode(ellipseOfSize: CGSizeMake(BOMB_SIZE.width, BOMB_SIZE.height / 2))
-        shadow.fillColor = UIColor.blackColor()
+        shadow = SKShapeNode(ellipseOf: CGSize(width: BOMB_SIZE.width, height: BOMB_SIZE.height / 2))
+        shadow.fillColor = UIColor.black
         shadow.zPosition = Z_POS - 1
 
         super.init()
@@ -55,7 +55,7 @@ class TBBomb : SKNode {
     }
 
     func initiateNewDirection(target: CGPoint, newSpeed: CGFloat) {
-        var distance = CGPoint.distance(target, second: self.position)
+        var distance = CGPoint.distance(first: target, second: self.position)
         if distance == 0 {
             distance = 1
         }
@@ -69,7 +69,7 @@ class TBBomb : SKNode {
         if state == .Normal {
             self.position += bombSpeed
             jumpedDistance += hypot(bombSpeed.x, bombSpeed.y)
-            zHeight = getParabolaHeight(2 * jumpedDistance / jumpDistance - 1) + 0.1
+            zHeight = getParabolaHeight(x: 2 * jumpedDistance / jumpDistance - 1) + 0.1
             sprite.setScale(scaleByHeight)
             sprite.position.y = BOMB_SIZE.height * (zHeight * 2 + 0.5)
         }
@@ -82,7 +82,7 @@ class TBBomb : SKNode {
     }
 }
 
-let BOMB_SIZE = CGSizeMake(30, 30)
+let BOMB_SIZE = CGSize(width: 30, height: 30)
 
 private let Z_POS: CGFloat = 200
 private let SPEED_MULTIPLIER: CGFloat = 3

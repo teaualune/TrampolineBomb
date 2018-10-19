@@ -32,21 +32,25 @@ class GameViewController: UIViewController {
 
             let scene = GameScene(size: self.view.bounds.size)
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .aspectFill
     
             skView.presentScene(scene)
         }
     }
 
-    override func shouldAutorotate() -> Bool {
+//    override func shouldAutorotate() -> Bool {
+//        return true
+//    }
+    
+    override var shouldAutorotate: Bool {
         return true
     }
-
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return .Portrait
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .portrait
         } else {
-            return .All
+            return .all
         }
     }
 
@@ -54,8 +58,8 @@ class GameViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-
-    override func prefersStatusBarHidden() -> Bool {
+    
+    override var prefersStatusBarHidden: Bool {
         return true
     }
 }
@@ -67,17 +71,17 @@ extension CGPoint {
 }
 
 func +(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
-    return CGPointMake(lhs.x + rhs.x, lhs.y + rhs.y)
+    return CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
 }
 
 func -(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
-    return CGPointMake(lhs.x - rhs.x, lhs.y - rhs.y)
+    return CGPoint(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
 }
 
-func +=(inout lhs: CGPoint, rhs: CGPoint) {
+func +=( lhs: inout CGPoint, rhs: CGPoint) {
     lhs = lhs + rhs
 }
 
 func *(lhs: CGFloat, rhs: CGPoint) -> CGPoint {
-    return CGPointMake(lhs * rhs.x, lhs * rhs.y)
+    return CGPoint(x: lhs * rhs.x, y: lhs * rhs.y)
 }

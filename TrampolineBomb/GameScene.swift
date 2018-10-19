@@ -12,22 +12,22 @@ class GameScene: SKScene {
 
     private let game = TBGame()
 
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
 
         self.addChild(game.root)
 
-        game.root.addChild(setupBgNode(self.frame))
+        game.root.addChild(setupBgNode(frame: self.frame))
 
-        game.player1.addPlayer(game.root, frame: self.frame)
-        game.player2.addPlayer(game.root, frame: self.frame)
+        game.player1.addPlayer(toNode: game.root, frame: self.frame)
+        game.player2.addPlayer(toNode: game.root, frame: self.frame)
 
         game.state = .END
-        game.reset(self.frame)
+        game.reset(frame: self.frame)
 
         let startLabel = TBStartButton(fontNamed: "Chalkduster")
-        startLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
+        startLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         startLabel.game = game
-        game.listenGameState(startLabel)
+        game.listenGameState(listener: startLabel)
         game.root.addChild(startLabel)
     }
 
@@ -36,31 +36,31 @@ class GameScene: SKScene {
         //        bgNode.fillColor = UIColor.redColor()
         let bgNode = SKSpriteNode(imageNamed: "bg")
         bgNode.setScale(max(1, frame.width / bgNode.size.width, frame.height / bgNode.size.height))
-        bgNode.position = CGPoint(x:CGRectGetMidX(frame), y:CGRectGetMidY(frame))
+        bgNode.position = CGPoint(x: frame.midX, y: frame.midY)
         bgNode.zPosition = -100
         return bgNode
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
        /* Called when a touch begins */
         if game.state == .PLAYING {
-            game.receiveNewTouches(touches)
+            game.receiveNewTouches(touches: touches)
         }
     }
 
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if game.state == .PLAYING {
-            game.removeTouches(touches)
+            game.removeTouches(touches: touches)
         }
     }
 
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        if let t = touches where game.state == .PLAYING {
-            game.removeTouches(t)
+    override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
+        if let t = touches, game.state == .PLAYING {
+            game.removeTouches(touches: t)
         }
     }
 
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         if game.state == .PLAYING {
             game.update()

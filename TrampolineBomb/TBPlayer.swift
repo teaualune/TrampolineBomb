@@ -9,12 +9,12 @@
 import SpriteKit
 
 enum PlayerNumber : Int, Hashable {
-    case One = 0
-    case Two = 1
+    case one = 0
+    case two = 1
 
-    var hashValue: Int { get {
+    var hashValue: Int {
         return rawValue
-    }}
+    }
 }
 
 func ==(lhs: PlayerNumber, rhs: PlayerNumber) -> Bool {
@@ -28,32 +28,32 @@ class TBPlayer {
     let playerLabel: SKLabelNode
     let playerNumber: PlayerNumber
 
-    var dragOffset: CGPoint = CGPointZero
+    var dragOffset: CGPoint = CGPoint.zero
     var dragYRange: SKRange = SKRange()
 
     init(playerNumber: PlayerNumber) {
         self.playerNumber = playerNumber
 
         switch playerNumber {
-        case .One:
+        case .one:
             trampoline = TBTrampoline(backgroundName: "trampoline1", size: SIZE)
             break
-        case .Two:
+        case .two:
             trampoline = TBTrampoline(backgroundName: "trampoline2", size: SIZE)
-            trampoline.zRotation = CGFloat(M_PI)
+            trampoline.zRotation = CGFloat.pi
             break
         }
 
         playerLabel = SKLabelNode(fontNamed: "Chalkduster")
-        playerLabel.text = getLabelText()
+        playerLabel.text = labelText
         playerLabel.fontName = "Chalkduster"
         playerLabel.fontSize = 20
-        if playerNumber == .Two {
-            playerLabel.zRotation = CGFloat(M_PI)
+        if playerNumber == .two {
+            playerLabel.zRotation = CGFloat.pi
         }
     }
-
-    private func getLabelText() -> String {
+    
+    private var labelText: String {
         return "player \(playerNumber.rawValue + 1), HP = \(hp)"
     }
 
@@ -61,19 +61,19 @@ class TBPlayer {
 
         let halfTrampolineHeight = SIZE.height / 2 - 10
         switch playerNumber {
-        case .One:
-            dragYRange.lowerLimit = CGRectGetMinY(frame) + halfTrampolineHeight
-            dragYRange.upperLimit = CGRectGetMidY(frame) - halfTrampolineHeight - 30
+        case .one:
+            dragYRange.lowerLimit = frame.minY + halfTrampolineHeight
+            dragYRange.upperLimit = frame.midY - halfTrampolineHeight - 30
             break
-        case .Two:
-            dragYRange.lowerLimit = CGRectGetMidY(frame) + halfTrampolineHeight + 30
-            dragYRange.upperLimit = CGRectGetMaxY(frame) - halfTrampolineHeight
+        case .two:
+            dragYRange.lowerLimit = frame.midY + halfTrampolineHeight + 30
+            dragYRange.upperLimit = frame.maxY - halfTrampolineHeight
         }
 
         let halfTrampolineWidth = SIZE.width / 2 - 10
-        trampoline.constraints = [SKConstraint.positionX(SKRange(lowerLimit: CGRectGetMinX(frame) + halfTrampolineWidth, upperLimit: CGRectGetMaxX(frame) - halfTrampolineWidth), y: dragYRange)]
+        trampoline.constraints = [SKConstraint.positionX(SKRange(lowerLimit: frame.minX + halfTrampolineWidth, upperLimit: frame.maxX - halfTrampolineWidth), y: dragYRange)]
 
-        setInitialPosition(frame)
+        setInitialPosition(frame: frame)
 
         toNode.addChild(playerLabel)
         toNode.addChild(trampoline)
@@ -83,21 +83,21 @@ class TBPlayer {
         let y: CGFloat
         let labelY: CGFloat
         switch playerNumber {
-        case .One:
-            y = CGRectGetMidY(frame) / 2
-            labelY = CGRectGetMinY(frame) + 20
+        case .one:
+            y = frame.midY / 2
+            labelY = frame.minY + 20
             break
-        case .Two:
-            y = CGRectGetMidY(frame) * 3 / 2
-            labelY = CGRectGetMaxY(frame) - 20
+        case .two:
+            y = frame.midY * 3 / 2
+            labelY = frame.maxY - 20
         }
-        let x = CGRectGetMidX(frame)
-        playerLabel.position = CGPointMake(x, labelY)
-        trampoline.position = CGPointMake(x, y)
+        let x = frame.midX
+        playerLabel.position = CGPoint(x: x, y: labelY)
+        trampoline.position = CGPoint(x: x, y: y)
     }
  
     func isPointNearTrampoline(point: CGPoint) -> CGPoint? {
-        let distance = CGPoint.distance(point, second: trampoline.position)
+        let distance = CGPoint.distance(first: point, second: trampoline.position)
         if distance < PLAYER_DRAG_THRESHOLD {
             return point - trampoline.position
         } else {
@@ -109,27 +109,27 @@ class TBPlayer {
 
     func update(touch: UITouch?) {
         if let t = touch {
-            updateTrampolinePosition(t)
+            updateTrampolinePosition(touch: t)
         }
 
         if hp != cachedHP {
-            playerLabel.text = getLabelText()
+            playerLabel.text = labelText
             cachedHP = hp
         }
     }
 
     private func updateTrampolinePosition(touch: UITouch) {
         guard let parent = trampoline.parent else { return }
-        trampoline.position = touch.locationInNode(parent) - dragOffset
+        trampoline.position = touch.location(in: parent) - dragOffset
     }
 
     func reset() {
         hp = MAX_HP
         cachedHP = hp
-        playerLabel.text = getLabelText()
+        playerLabel.text = labelText
     }
 }
 
 private let MAX_HP: Int = 5
-private let SIZE = CGSizeMake(100, 100)
+private let SIZE = CGSize(width: 100, height: 100)
 let PLAYER_DRAG_THRESHOLD: CGFloat = 140
